@@ -1,0 +1,49 @@
+PODS:
+  - AFNetworking (2.1.0):
+    - AFNetworking/NSURLConnection
+    - AFNetworking/NSURLSession
+    - AFNetworking/Reachability
+    - AFNetworking/Security
+    - AFNetworking/Serialization
+    - AFNetworking/UIKit
+  - AFNetworking/NSURLConnection (2.1.0):
+    - AFNetworking/Reachability
+    - AFNetworking/Security
+    - AFNetworking/Serialization
+  - AFNetworking/NSURLSession (2.1.0):
+    - AFNetworking/NSURLConnection
+  - AFNetworking/Reachability (2.1.0)
+  - AFNetworking/Security (2.1.0)
+  - AFNetworking/Serialization (2.1.0)
+  - AFNetworking/UIKit (2.1.0):
+    - AFNetworking/NSURLConnection
+  - DTCoreText (1.6.10):
+    - DTFoundation/Core (~> 1.6.1)
+    - DTFoundation/DTHTMLParser (~> 1.6.1)
+    - DTFoundation/UIKit (~> 1.6.1)
+  - DTFoundation/Core (1.6.1)
+  - DTFoundation/DTHTMLParser (1.6.1):
+    - DTFoundation/Core
+  - DTFoundation/UIKit (1.6.1):
+    - DTFoundation/Core
+  - Slash (0.1.2):
+    - Slash/arc
+    - Slash/no-arc
+  - Slash/arc (0.1.2)
+  - Slash/no-arc (0.1.2)
+  - TTTAttributedLabel (1.8.1)
+
+DEPENDENCIES:
+  - AFNetworking (~> 2.1.0)
+  - DTCoreText (~> 1.6.10)
+  - Slash
+  - TTTAttributedLabel (~> 1.8.1)
+
+SPEC CHECKSUMS:
+  AFNetworking: c7d7901a83f631414c7eda1737261f696101a5cd
+  DTCoreText: 39e316024954ef7e86c7fbfb5f0eee991f7211f1
+  DTFoundation: 23d39b258d481221167cd4bf3df86ff3f22b1f55
+  Slash: 7b3a0bf5fe51ed62e45ae52a3290b0b828e36c87
+  TTTAttributedLabel: 3a571d73e055f4a79c304240598e4bfd199238e4
+
+COCOAPODS: 0.29.0
