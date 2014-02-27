@@ -26,7 +26,7 @@
 {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
-        
+        [self setup];
     }
     return self;
 }
@@ -34,13 +34,17 @@
 - (id)initWithCoder:(NSCoder *)aDecoder{
     self = [super initWithCoder:aDecoder];
     if (self) {
-        self.notificationLabel = [[TTTAttributedLabel alloc] initWithFrame:CGRectMake(88, 4, 220, 60)];
-        self.notificationLabel.numberOfLines = 0;
-        self.notificationLabel.textColor = [UIColor colorWithRed:0.14 green:0.16 blue:0.21 alpha:1.0];
-        self.notificationLabel.verticalAlignment = TTTAttributedLabelVerticalAlignmentTop;
-        [self.contentView addSubview:self.notificationLabel];
+        [self setup];
     }
     return self;
+}
+
+- (void) setup{
+    self.notificationLabel = [[TTTAttributedLabel alloc] initWithFrame:CGRectMake(88, 4, 220, 60)];
+    self.notificationLabel.numberOfLines = 0;
+    self.notificationLabel.textColor = [UIColor colorWithRed:0.14 green:0.16 blue:0.21 alpha:1.0];
+    self.notificationLabel.verticalAlignment = TTTAttributedLabelVerticalAlignmentTop;
+    [self.contentView addSubview:self.notificationLabel];
 }
 
 - (void)setUpWithNotification:(Notification *)notification{
