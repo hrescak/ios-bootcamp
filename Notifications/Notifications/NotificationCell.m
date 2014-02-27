@@ -31,14 +31,19 @@
     return self;
 }
 
-- (void)setUpWithNotification:(Notification *)notification{
+- (id)initWithCoder:(NSCoder *)aDecoder{
+    self = [super initWithCoder:aDecoder];
+    if (self) {
+        self.notificationLabel = [[TTTAttributedLabel alloc] initWithFrame:CGRectMake(88, 4, 220, 60)];
+        self.notificationLabel.numberOfLines = 0;
+        self.notificationLabel.textColor = [UIColor colorWithRed:0.14 green:0.16 blue:0.21 alpha:1.0];
+        self.notificationLabel.verticalAlignment = TTTAttributedLabelVerticalAlignmentTop;
+        [self.contentView addSubview:self.notificationLabel];
+    }
+    return self;
+}
 
-    [self.notificationLabel removeFromSuperview];
-    
-    self.notificationLabel = [[TTTAttributedLabel alloc] initWithFrame:CGRectMake(88, 4, 220, 60)];
-    self.notificationLabel.numberOfLines = 0;
-    self.notificationLabel.textColor = [UIColor colorWithRed:0.14 green:0.16 blue:0.21 alpha:1.0];
-    self.notificationLabel.verticalAlignment = TTTAttributedLabelVerticalAlignmentTop;
+- (void)setUpWithNotification:(Notification *)notification{
 
     NSDictionary *style = @{
                             @"$default" : @{NSFontAttributeName  : [UIFont fontWithName:@"HelveticaNeue" size:14]},
@@ -46,9 +51,6 @@
                             };
     NSAttributedString *attributedString = [SLSMarkupParser attributedStringWithMarkup:notification.notificationText style:style error:NULL];
     self.notificationLabel.text = attributedString;
-    
-    [self.contentView addSubview:self.notificationLabel];
-
     self.timestampLabel.text = notification.time;
     self.timestampLabel.textColor = [UIColor colorWithRed:0.68 green:0.70 blue:0.73 alpha:1.0];
     NSURL *imageUrl = [NSURL URLWithString:notification.imageUrl];
@@ -61,6 +63,7 @@
     [super setSelected:selected animated:animated];
 
     // Configure the view for the selected state
+    
 }
 
 @end
