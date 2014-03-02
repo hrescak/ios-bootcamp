@@ -7,6 +7,7 @@
 //
 
 #import "MainViewController.h"
+#import "UIView+SimplePosition.h"
 
 static const CGFloat kPeekHeight = 40;
 static const CGFloat kTension = .2;
@@ -25,6 +26,7 @@ static const int kNumberOfCards = 10;
 @property (nonatomic, assign) CGFloat slidePointOffset;
 @property (nonatomic, assign) CGFloat slideOriginalY;
 @property (nonatomic, assign) CGFloat feedPointY;
+@property (nonatomic, assign) CGFloat feedViewVerticalOffset;
 
 @end
 
@@ -54,6 +56,8 @@ static const int kNumberOfCards = 10;
     [self setUpFeed];
 }
 
+# pragma mark - SlideView actions
+
 - (void)handleSlideViewPanning:(UIPanGestureRecognizer *)panGestureRecognizer{
     CGPoint point = [panGestureRecognizer locationInView:self.view];
     CGPoint velocity = [panGestureRecognizer velocityInView:self.view];
@@ -65,7 +69,7 @@ static const int kNumberOfCards = 10;
     } else if (panGestureRecognizer.state == UIGestureRecognizerStateChanged) {
         CGFloat targetY = point.y - self.slidePointOffset;
         
-        if (self.slideView.frame.origin.y < 0) {
+        if (self.slideView.y < 0) {
             targetY = self.slideOriginalY + (targetY - self.slideOriginalY) * kTension;
         }
         
@@ -73,14 +77,14 @@ static const int kNumberOfCards = 10;
     
     } else if (panGestureRecognizer.state == UIGestureRecognizerStateEnded) {
     
-        CGFloat targetY = self.view.frame.origin.y;
+        CGFloat targetY = self.view.y;
         
         if (velocity.y > 0) {
-            targetY = self.view.frame.size.height - kPeekHeight;
+            targetY = self.view.height - kPeekHeight;
         }
 
         [UIView animateWithDuration:.4 animations:^{
-            CGRect targetFrame  = CGRectMake(self.slideView.frame.origin.x, targetY , self.slideView.frame.size.width, self.slideView.frame.size.height);
+            CGRect targetFrame  = CGRectMake(self.slideView.x, targetY , self.slideView.width, self.slideView.height);
             self.slideView.frame = targetFrame;
         }];
     }
@@ -91,11 +95,13 @@ static const int kNumberOfCards = 10;
 - (void)setUpFeed {
     
     for (int i = 0; i < kNumberOfCards; i++) {
-        UIView *feedItem = [[UIView alloc] initWithFrame:CGRectMake(i*(kFeedCardWidth + kFeedCardGutter), 0, kFeedCardWidth, self.feedScrollView.frame.size.height)];
+        UIView *feedItem = [[UIView alloc] initWithFrame:CGRectMake(i*(kFeedCardWidth + kFeedCardGutter), 0, kFeedCardWidth, self.feedScrollView.height)];
         feedItem.backgroundColor = [UIColor whiteColor];
         [self.feedScrollView addSubview:feedItem];
     }
-    self.feedScrollView.contentSize = CGSizeMake(kNumberOfCards * (kFeedCardWidth + kFeedCardGutter), self.feedScrollView.frame.size.height);
+    self.feedScrollView.contentSize = CGSizeMake(kNumberOfCards * (kFeedCardWidth + kFeedCardGutter), self.feedScrollView.height);
+    
+    self.feedViewVerticalOffset = self.view.height - self.feedScrollView.height;
     
     // set up anchor point for scaling
     CGPoint topCenter = CGPointMake(CGRectGetMidX(self.feedScrollView.frame), CGRectGetMaxY(self.feedScrollView.frame));
@@ -103,7 +109,7 @@ static const int kNumberOfCards = 10;
     self.feedScrollView.layer.position = topCenter;
     
     //set up bounds for when scaling down
-    self.feedScrollView.bounds = CGRectMake(0, 0, self.feedScrollView.frame.size.width + kFeedOverflow * 2, self.feedScrollView.frame.size.height);
+    self.feedScrollView.bounds = CGRectMake(0, 0, self.feedScrollView.width + kFeedOverflow * 2, self.feedScrollView.height);
     self.feedScrollView.contentInset = UIEdgeInsetsMake(0, kFeedOverflow, 0, kFeedOverflow);
     self.feedScrollView.contentOffset = CGPointMake(-kFeedOverflow, 0);
 }
@@ -116,12 +122,18 @@ static const int kNumberOfCards = 10;
         
     } else if (panGestureRecognizer.state == UIGestureRecognizerStateChanged) {
         CGFloat panDistance = point.y - self.feedPointY;
-        CGFloat minDistance = 0;
-        CGFloat maxDistance = -400;
+        
+        //calculating rate of scale depending on position in the feedview
+        CGFloat minPoint = self.view.height;
+        CGFloat maxPoint = self.feedViewVerticalOffset;
+        CGFloat minDistance = -30; // minimum distance to scale up
+        CGFloat maxDistance = -(self.feedViewVerticalOffset);
+        CGFloat scaleDistance = minDistance + (self.feedPointY - minPoint) / (maxPoint - minPoint) * (maxDistance - minDistance);
+        
+        // calculating scale
         CGFloat initialScale = 1;
         CGFloat maxScale = 2.5;
-        
-        CGFloat targetScale = initialScale + (panDistance - minDistance) / (maxDistance - minDistance) * (maxScale - initialScale);
+        CGFloat targetScale = initialScale + (panDistance) / (scaleDistance) * (maxScale - initialScale);
         
         if (targetScale < 1) {
             targetScale = initialScale + (targetScale - initialScale) * kFeedScaleTension;

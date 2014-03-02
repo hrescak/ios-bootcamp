@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		DC0A29FD18C271FC0086DF6A /* UIView+SimplePosition.m in Sources */ = {isa = PBXBuildFile; fileRef = DC0A29FC18C271FC0086DF6A /* UIView+SimplePosition.m */; };
+		DC0A2A0018C3C4260086DF6A /* UIColor+SimpleColor.m in Sources */ = {isa = PBXBuildFile; fileRef = DC0A29FF18C3C4260086DF6A /* UIColor+SimpleColor.m */; };
 		DCB642D418BEA9B6005CB51F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DCB642D318BEA9B6005CB51F /* Foundation.framework */; };
 		DCB642D618BEA9B6005CB51F /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DCB642D518BEA9B6005CB51F /* CoreGraphics.framework */; };
 		DCB642D818BEA9B6005CB51F /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DCB642D718BEA9B6005CB51F /* UIKit.framework */; };
@@ -21,7 +23,6 @@
 		DCB642F918BEA9B6005CB51F /* PaperTests.m in Sources */ = {isa = PBXBuildFile; fileRef = DCB642F818BEA9B6005CB51F /* PaperTests.m */; };
 		DCB6430518BEA9CB005CB51F /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DCB6430318BEA9CB005CB51F /* MainViewController.m */; };
 		DCB6430618BEA9CB005CB51F /* MainViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DCB6430418BEA9CB005CB51F /* MainViewController.xib */; };
-		DCB6430918BED119005CB51F /* UIView+Positioning.m in Sources */ = {isa = PBXBuildFile; fileRef = DCB6430818BED119005CB51F /* UIView+Positioning.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -35,6 +36,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		DC0A29FB18C271FC0086DF6A /* UIView+SimplePosition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+SimplePosition.h"; sourceTree = "<group>"; };
+		DC0A29FC18C271FC0086DF6A /* UIView+SimplePosition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+SimplePosition.m"; sourceTree = "<group>"; };
+		DC0A29FE18C3C4260086DF6A /* UIColor+SimpleColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+SimpleColor.h"; sourceTree = "<group>"; };
+		DC0A29FF18C3C4260086DF6A /* UIColor+SimpleColor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+SimpleColor.m"; sourceTree = "<group>"; };
 		DCB642D018BEA9B6005CB51F /* Paper.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Paper.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DCB642D318BEA9B6005CB51F /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		DCB642D518BEA9B6005CB51F /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -54,8 +59,6 @@
 		DCB6430218BEA9CB005CB51F /* MainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
 		DCB6430318BEA9CB005CB51F /* MainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
 		DCB6430418BEA9CB005CB51F /* MainViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainViewController.xib; sourceTree = "<group>"; };
-		DCB6430718BED119005CB51F /* UIView+Positioning.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Positioning.h"; sourceTree = "<group>"; };
-		DCB6430818BED119005CB51F /* UIView+Positioning.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Positioning.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -82,6 +85,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		DC0A29FA18C271E70086DF6A /* Categories */ = {
+			isa = PBXGroup;
+			children = (
+				DC0A29FB18C271FC0086DF6A /* UIView+SimplePosition.h */,
+				DC0A29FC18C271FC0086DF6A /* UIView+SimplePosition.m */,
+				DC0A29FE18C3C4260086DF6A /* UIColor+SimpleColor.h */,
+				DC0A29FF18C3C4260086DF6A /* UIColor+SimpleColor.m */,
+			);
+			name = Categories;
+			sourceTree = "<group>";
+		};
 		DCB642C718BEA9B6005CB51F = {
 			isa = PBXGroup;
 			children = (
@@ -115,6 +129,7 @@
 		DCB642D918BEA9B6005CB51F /* Paper */ = {
 			isa = PBXGroup;
 			children = (
+				DC0A29FA18C271E70086DF6A /* Categories */,
 				DCB642E218BEA9B6005CB51F /* AppDelegate.h */,
 				DCB642E318BEA9B6005CB51F /* AppDelegate.m */,
 				DCB642E518BEA9B6005CB51F /* Images.xcassets */,
@@ -122,8 +137,6 @@
 				DCB6430218BEA9CB005CB51F /* MainViewController.h */,
 				DCB6430318BEA9CB005CB51F /* MainViewController.m */,
 				DCB6430418BEA9CB005CB51F /* MainViewController.xib */,
-				DCB6430718BED119005CB51F /* UIView+Positioning.h */,
-				DCB6430818BED119005CB51F /* UIView+Positioning.m */,
 			);
 			path = Paper;
 			sourceTree = "<group>";
@@ -255,8 +268,9 @@
 			files = (
 				DCB642E418BEA9B6005CB51F /* AppDelegate.m in Sources */,
 				DCB6430518BEA9CB005CB51F /* MainViewController.m in Sources */,
-				DCB6430918BED119005CB51F /* UIView+Positioning.m in Sources */,
+				DC0A29FD18C271FC0086DF6A /* UIView+SimplePosition.m in Sources */,
 				DCB642E018BEA9B6005CB51F /* main.m in Sources */,
+				DC0A2A0018C3C4260086DF6A /* UIColor+SimpleColor.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -457,6 +471,7 @@
 				DCB642FE18BEA9B6005CB51F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		DCB642FF18BEA9B6005CB51F /* Build configuration list for PBXNativeTarget "PaperTests" */ = {
 			isa = XCConfigurationList;
@@ -465,6 +480,7 @@
 				DCB6430118BEA9B6005CB51F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
