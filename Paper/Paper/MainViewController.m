@@ -8,6 +8,7 @@
 
 #import "MainViewController.h"
 #import "UIView+SimplePosition.h"
+#import "FeedStoreViewController.h"
 
 static const CGFloat kPeekHeight = 40;
 static const CGFloat kTension = .2;
@@ -157,6 +158,25 @@ static const int kNumberOfCards = 10;
     return NO;
 }
 
+- (BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)recognizer {
+    if (recognizer == self.feedGestureRecognizer) {
+        CGPoint velocity = [self.feedGestureRecognizer velocityInView:self.feedScrollView];
+        return ABS(velocity.x) < ABS(velocity.y); // Vertical panning
+    } else {
+        return YES;
+    }
+}
+
+# pragma mark - Feed Store button
+
+- (IBAction)showFeedStore:(id)sender{
+    NSLog(@"yeah");
+    FeedStoreViewController *feedStoreController = [[FeedStoreViewController alloc] init];
+    feedStoreController.modalPresentationStyle = UIModalPresentationPageSheet;
+    [self presentViewController:feedStoreController animated:YES completion:^{
+        self.slideView.frame = CGRectMake(0, 0, self.view.width, self.view.height);
+    }];
+}
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];

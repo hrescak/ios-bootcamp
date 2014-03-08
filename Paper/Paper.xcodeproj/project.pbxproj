@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		DC0A29FD18C271FC0086DF6A /* UIView+SimplePosition.m in Sources */ = {isa = PBXBuildFile; fileRef = DC0A29FC18C271FC0086DF6A /* UIView+SimplePosition.m */; };
 		DC0A2A0018C3C4260086DF6A /* UIColor+SimpleColor.m in Sources */ = {isa = PBXBuildFile; fileRef = DC0A29FF18C3C4260086DF6A /* UIColor+SimpleColor.m */; };
+		DCA75A3D18CBAE7C00C5C998 /* FeedStoreViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DCA75A3B18CBAE7C00C5C998 /* FeedStoreViewController.m */; };
+		DCA75A3E18CBAE7C00C5C998 /* FeedStoreViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DCA75A3C18CBAE7C00C5C998 /* FeedStoreViewController.xib */; };
 		DCB642D418BEA9B6005CB51F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DCB642D318BEA9B6005CB51F /* Foundation.framework */; };
 		DCB642D618BEA9B6005CB51F /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DCB642D518BEA9B6005CB51F /* CoreGraphics.framework */; };
 		DCB642D818BEA9B6005CB51F /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DCB642D718BEA9B6005CB51F /* UIKit.framework */; };
@@ -40,6 +42,9 @@
 		DC0A29FC18C271FC0086DF6A /* UIView+SimplePosition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+SimplePosition.m"; sourceTree = "<group>"; };
 		DC0A29FE18C3C4260086DF6A /* UIColor+SimpleColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+SimpleColor.h"; sourceTree = "<group>"; };
 		DC0A29FF18C3C4260086DF6A /* UIColor+SimpleColor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+SimpleColor.m"; sourceTree = "<group>"; };
+		DCA75A3A18CBAE7C00C5C998 /* FeedStoreViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FeedStoreViewController.h; sourceTree = "<group>"; };
+		DCA75A3B18CBAE7C00C5C998 /* FeedStoreViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FeedStoreViewController.m; sourceTree = "<group>"; };
+		DCA75A3C18CBAE7C00C5C998 /* FeedStoreViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FeedStoreViewController.xib; sourceTree = "<group>"; };
 		DCB642D018BEA9B6005CB51F /* Paper.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Paper.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DCB642D318BEA9B6005CB51F /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		DCB642D518BEA9B6005CB51F /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -137,6 +142,9 @@
 				DCB6430218BEA9CB005CB51F /* MainViewController.h */,
 				DCB6430318BEA9CB005CB51F /* MainViewController.m */,
 				DCB6430418BEA9CB005CB51F /* MainViewController.xib */,
+				DCA75A3A18CBAE7C00C5C998 /* FeedStoreViewController.h */,
+				DCA75A3B18CBAE7C00C5C998 /* FeedStoreViewController.m */,
+				DCA75A3C18CBAE7C00C5C998 /* FeedStoreViewController.xib */,
 			);
 			path = Paper;
 			sourceTree = "<group>";
@@ -245,6 +253,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DCA75A3E18CBAE7C00C5C998 /* FeedStoreViewController.xib in Resources */,
 				DCB642DE18BEA9B6005CB51F /* InfoPlist.strings in Resources */,
 				DCB6430618BEA9CB005CB51F /* MainViewController.xib in Resources */,
 				DCB642E618BEA9B6005CB51F /* Images.xcassets in Resources */,
@@ -270,6 +279,7 @@
 				DCB6430518BEA9CB005CB51F /* MainViewController.m in Sources */,
 				DC0A29FD18C271FC0086DF6A /* UIView+SimplePosition.m in Sources */,
 				DCB642E018BEA9B6005CB51F /* main.m in Sources */,
+				DCA75A3D18CBAE7C00C5C998 /* FeedStoreViewController.m in Sources */,
 				DC0A2A0018C3C4260086DF6A /* UIColor+SimpleColor.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
