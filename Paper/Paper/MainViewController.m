@@ -10,7 +10,7 @@
 #import "UIView+SimplePosition.h"
 #import "FeedStoreViewController.h"
 
-static const CGFloat kPeekHeight = 40;
+static const CGFloat kPeekHeight = 50;
 static const CGFloat kTension = .2;
 static const CGFloat kFeedScaleTension = .2;
 static const CGFloat kFeedOverflow = 100;
@@ -28,7 +28,6 @@ static const int kNumberOfCards = 10;
 @property (nonatomic, assign) CGFloat slideOriginalY;
 @property (nonatomic, assign) CGFloat feedPointY;
 @property (nonatomic, assign) CGFloat feedViewVerticalOffset;
-
 @end
 
 @implementation MainViewController
@@ -45,7 +44,6 @@ static const int kNumberOfCards = 10;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
 
     self.slideViewGestureRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handleSlideViewPanning:)];
     [self.slideView addGestureRecognizer:self.slideViewGestureRecognizer];
@@ -101,7 +99,6 @@ static const int kNumberOfCards = 10;
         [self.feedScrollView addSubview:feedItem];
     }
     self.feedScrollView.contentSize = CGSizeMake(kNumberOfCards * (kFeedCardWidth + kFeedCardGutter), self.feedScrollView.height);
-    
     self.feedViewVerticalOffset = self.view.height - self.feedScrollView.height;
     
     // set up anchor point for scaling
@@ -136,6 +133,7 @@ static const int kNumberOfCards = 10;
         CGFloat maxScale = 2.5;
         CGFloat targetScale = initialScale + (panDistance) / (scaleDistance) * (maxScale - initialScale);
         
+        //damping when trying to scale under 1
         if (targetScale < 1) {
             targetScale = initialScale + (targetScale - initialScale) * kFeedScaleTension;
         }
@@ -170,7 +168,6 @@ static const int kNumberOfCards = 10;
 # pragma mark - Feed Store button
 
 - (IBAction)showFeedStore:(id)sender{
-    NSLog(@"yeah");
     FeedStoreViewController *feedStoreController = [[FeedStoreViewController alloc] init];
     feedStoreController.modalPresentationStyle = UIModalPresentationPageSheet;
     [self presentViewController:feedStoreController animated:YES completion:^{

@@ -8,6 +8,7 @@
 
 #import "FeedStoreViewController.h"
 #import "UIView+SimplePosition.h"
+#import "CardView.h"
 
 static const CGFloat kWobbleAngle = 2;
 static const CGFloat kShowDropAreaThreshold = 500;
@@ -16,8 +17,8 @@ static const CGPoint kCardOriginPoint = {160, 500};
 static const CGFloat kCardScaleRatio = 1.1;
 
 @interface FeedStoreViewController ()
-@property (nonatomic, weak) IBOutlet UIView *facebookCard;
-@property (nonatomic, weak) IBOutlet UIView *headlinesCard;
+@property (nonatomic, weak) IBOutlet CardView *facebookCard;
+@property (nonatomic, weak) IBOutlet CardView *headlinesCard;
 @property (nonatomic, weak) IBOutlet UIView *dropArea;
 @property (nonatomic, strong) UILongPressGestureRecognizer *cardGestureRecognizer;
 @property (nonatomic, assign) BOOL isDropAreaVisible;
@@ -44,6 +45,17 @@ static const CGFloat kCardScaleRatio = 1.1;
 {
     [super viewDidLoad];
     
+    //let's do cards
+    self.facebookCard = [[[NSBundle mainBundle] loadNibNamed:@"CardView" owner:self options:nil] objectAtIndex:0];
+    [self.facebookCard setTitle:@"Facebook"];
+    self.facebookCard.center = CGPointMake(self.view.frame.size.width/2, 178);
+    [self.view addSubview:self.facebookCard];
+    
+    self.headlinesCard = [[[NSBundle mainBundle] loadNibNamed:@"CardView" owner:self options:nil] objectAtIndex:0];
+    [self.headlinesCard setTitle:@"Headlines"];
+    self.headlinesCard.center = kCardOriginPoint;
+    [self.view addSubview:self.headlinesCard];
+
     // hide the droparea initially
     self.dropArea.alpha = 0;
     
@@ -54,12 +66,11 @@ static const CGFloat kCardScaleRatio = 1.1;
     
     // set up dynamics
     self.animator = [[UIDynamicAnimator alloc] initWithReferenceView:self.view];
-    
     self.gravity = [[UIGravityBehavior alloc] init];
     [self.animator addBehavior:self.gravity];
     
     self.itemBehavior = [[UIDynamicItemBehavior alloc] init];
-    //self.itemBehavior.angularResistance = 50;
+    self.itemBehavior.angularResistance = 5;
     [self.itemBehavior addItem:self.headlinesCard];
     [self.animator addBehavior:self.itemBehavior];
 }
@@ -67,7 +78,7 @@ static const CGFloat kCardScaleRatio = 1.1;
 - (void)viewDidAppear:(BOOL)animated
 {
     // Making facebook card wobble
-    [self makeWobble:self.facebookCard cancellable:NO];
+    [self.facebookCard startWobble];
 }
 
 - (void)didReceiveMemoryWarning
@@ -76,7 +87,7 @@ static const CGFloat kCardScaleRatio = 1.1;
     // Dispose of any resources that can be recreated.
 }
 
-#pragma mark - top area
+#pragma mark - drop area
 
 - (void)showDropArea{
     self.isDropAreaVisible = YES;
@@ -98,41 +109,20 @@ static const CGFloat kCardScaleRatio = 1.1;
 
 - (void)snapToDropArea{
     self.snapBehavior = [[UISnapBehavior alloc] initWithItem:self.headlinesCard snapToPoint:self.dropArea.center];
+    self.snapBehavior.damping = 0.7;
     [self.animator addBehavior:self.snapBehavior];
-    
-    [self bounceToScale:1 completion:nil];
+    [self.headlinesCard bounceToScale:1 completion:^(BOOL finished) {
+        [self.headlinesCard startWobble];
+    }];
 
 }
 - (void)snapToOrigin{
     self.snapBehavior = [[UISnapBehavior alloc] initWithItem:self.headlinesCard snapToPoint:kCardOriginPoint];
+    self.snapBehavior.damping = 0.7;
     [self.animator addBehavior:self.snapBehavior];
-    
-    [self bounceToScale:1 completion:^(BOOL finished) {
+    [self.headlinesCard bounceToScale:1 completion:^(BOOL finished) {
         [self hideDropArea];
     }];
-}
-
-#pragma mark - bouncing
-
-- (void)bounceToScale:(CGFloat) scale completion:(void (^)(BOOL finished))completion {
-    [UIView animateWithDuration:0.3 delay:0 usingSpringWithDamping:0.6 initialSpringVelocity:0 options:0 animations:^{
-        self.headlinesCard.transform = CGAffineTransformMakeScale(scale, scale);
-    } completion:completion];
-}
-
-#pragma mark - wobbling
-
-- (void)makeWobble:(UIView *)view cancellable:(BOOL)isCancellable{
-    
-    view.transform = CGAffineTransformMakeRotation(M_PI/180 * -kWobbleAngle);
-    [UIView animateWithDuration:1.5 delay:0 options:UIViewAnimationOptionRepeat | UIViewAnimationOptionAutoreverse | UIViewAnimationCurveEaseInOut | UIViewAnimationOptionAllowUserInteraction animations:^{
-        view.transform = CGAffineTransformMakeRotation(M_PI/180 * kWobbleAngle);
-    } completion:^(BOOL finished){
-        if (!finished) {
-            return;
-        }
-    }];
-
 }
 
 #pragma mark - gestures
@@ -143,7 +133,7 @@ static const CGFloat kCardScaleRatio = 1.1;
     
     if (recognizer.state == UIGestureRecognizerStateBegan) {
         [self.animator removeBehavior:self.snapBehavior];
-        [self bounceToScale:kCardScaleRatio completion:nil];
+        [self.headlinesCard bounceToScale:kCardScaleRatio completion:nil];
         
         //calculate the offset of touch
         CGPoint cardTouch = [recognizer locationInView:self.headlinesCard];
@@ -152,10 +142,9 @@ static const CGFloat kCardScaleRatio = 1.1;
         //create the attachment
         CGPoint offset = CGPointMake(cardTouch.x - self.headlinesCard.frame.size.width /2, cardTouch.y - self.headlinesCard.frame.size.height/2);
         self.attachment = [[UIAttachmentBehavior alloc] initWithItem:self.headlinesCard offsetFromCenter:UIOffsetMake(offset.x, offset.y) attachedToAnchor:touch];
-        //self.attachment.damping = 200;
         [self.animator addBehavior:self.attachment];
         
-        //[self.gravity addItem:self.headlinesCard];
+        [self.gravity addItem:self.headlinesCard];
         
     } else if (recognizer.state == UIGestureRecognizerStateChanged){
 
@@ -169,7 +158,7 @@ static const CGFloat kCardScaleRatio = 1.1;
     } else if (recognizer.state == UIGestureRecognizerStateEnded){
         
         [self.animator removeBehavior:self.attachment];
-        //[self.gravity removeItem:self.headlinesCard];
+        [self.gravity removeItem:self.headlinesCard];
         
         if (touch.y < kSnapDropAreaThreshold) {
             [self snapToDropArea];
@@ -179,6 +168,7 @@ static const CGFloat kCardScaleRatio = 1.1;
     }
 }
 
+#pragma mark - closing the modal
 
 - (IBAction)doneButtonTapped:(id)sender{
     [self dismissViewControllerAnimated:YES completion:nil];

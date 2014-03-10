@@ -9,6 +9,10 @@
 /* Begin PBXBuildFile section */
 		DC0A29FD18C271FC0086DF6A /* UIView+SimplePosition.m in Sources */ = {isa = PBXBuildFile; fileRef = DC0A29FC18C271FC0086DF6A /* UIView+SimplePosition.m */; };
 		DC0A2A0018C3C4260086DF6A /* UIColor+SimpleColor.m in Sources */ = {isa = PBXBuildFile; fileRef = DC0A29FF18C3C4260086DF6A /* UIColor+SimpleColor.m */; };
+		DC471CF918CE376A00B1B689 /* CardView.m in Sources */ = {isa = PBXBuildFile; fileRef = DC471CF818CE376A00B1B689 /* CardView.m */; };
+		DC471CFB18CE37F800B1B689 /* CardView.xib in Resources */ = {isa = PBXBuildFile; fileRef = DC471CFA18CE37F800B1B689 /* CardView.xib */; };
+		DC471CFF18CE542000B1B689 /* mainmenu.png in Resources */ = {isa = PBXBuildFile; fileRef = DC471CFD18CE542000B1B689 /* mainmenu.png */; };
+		DC471D0018CE542000B1B689 /* mainmenu@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DC471CFE18CE542000B1B689 /* mainmenu@2x.png */; };
 		DCA75A3D18CBAE7C00C5C998 /* FeedStoreViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DCA75A3B18CBAE7C00C5C998 /* FeedStoreViewController.m */; };
 		DCA75A3E18CBAE7C00C5C998 /* FeedStoreViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DCA75A3C18CBAE7C00C5C998 /* FeedStoreViewController.xib */; };
 		DCB642D418BEA9B6005CB51F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DCB642D318BEA9B6005CB51F /* Foundation.framework */; };
@@ -42,6 +46,11 @@
 		DC0A29FC18C271FC0086DF6A /* UIView+SimplePosition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+SimplePosition.m"; sourceTree = "<group>"; };
 		DC0A29FE18C3C4260086DF6A /* UIColor+SimpleColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+SimpleColor.h"; sourceTree = "<group>"; };
 		DC0A29FF18C3C4260086DF6A /* UIColor+SimpleColor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+SimpleColor.m"; sourceTree = "<group>"; };
+		DC471CF718CE376A00B1B689 /* CardView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CardView.h; sourceTree = "<group>"; };
+		DC471CF818CE376A00B1B689 /* CardView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CardView.m; sourceTree = "<group>"; };
+		DC471CFA18CE37F800B1B689 /* CardView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CardView.xib; sourceTree = "<group>"; };
+		DC471CFD18CE542000B1B689 /* mainmenu.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = mainmenu.png; sourceTree = "<group>"; };
+		DC471CFE18CE542000B1B689 /* mainmenu@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "mainmenu@2x.png"; sourceTree = "<group>"; };
 		DCA75A3A18CBAE7C00C5C998 /* FeedStoreViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FeedStoreViewController.h; sourceTree = "<group>"; };
 		DCA75A3B18CBAE7C00C5C998 /* FeedStoreViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FeedStoreViewController.m; sourceTree = "<group>"; };
 		DCA75A3C18CBAE7C00C5C998 /* FeedStoreViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FeedStoreViewController.xib; sourceTree = "<group>"; };
@@ -101,6 +110,15 @@
 			name = Categories;
 			sourceTree = "<group>";
 		};
+		DC471CFC18CE541600B1B689 /* Assets */ = {
+			isa = PBXGroup;
+			children = (
+				DC471CFD18CE542000B1B689 /* mainmenu.png */,
+				DC471CFE18CE542000B1B689 /* mainmenu@2x.png */,
+			);
+			name = Assets;
+			sourceTree = "<group>";
+		};
 		DCB642C718BEA9B6005CB51F = {
 			isa = PBXGroup;
 			children = (
@@ -134,6 +152,7 @@
 		DCB642D918BEA9B6005CB51F /* Paper */ = {
 			isa = PBXGroup;
 			children = (
+				DC471CFC18CE541600B1B689 /* Assets */,
 				DC0A29FA18C271E70086DF6A /* Categories */,
 				DCB642E218BEA9B6005CB51F /* AppDelegate.h */,
 				DCB642E318BEA9B6005CB51F /* AppDelegate.m */,
@@ -145,6 +164,9 @@
 				DCA75A3A18CBAE7C00C5C998 /* FeedStoreViewController.h */,
 				DCA75A3B18CBAE7C00C5C998 /* FeedStoreViewController.m */,
 				DCA75A3C18CBAE7C00C5C998 /* FeedStoreViewController.xib */,
+				DC471CF718CE376A00B1B689 /* CardView.h */,
+				DC471CF818CE376A00B1B689 /* CardView.m */,
+				DC471CFA18CE37F800B1B689 /* CardView.xib */,
 			);
 			path = Paper;
 			sourceTree = "<group>";
@@ -254,9 +276,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				DCA75A3E18CBAE7C00C5C998 /* FeedStoreViewController.xib in Resources */,
+				DC471CFB18CE37F800B1B689 /* CardView.xib in Resources */,
 				DCB642DE18BEA9B6005CB51F /* InfoPlist.strings in Resources */,
+				DC471CFF18CE542000B1B689 /* mainmenu.png in Resources */,
 				DCB6430618BEA9CB005CB51F /* MainViewController.xib in Resources */,
 				DCB642E618BEA9B6005CB51F /* Images.xcassets in Resources */,
+				DC471D0018CE542000B1B689 /* mainmenu@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -281,6 +306,7 @@
 				DCB642E018BEA9B6005CB51F /* main.m in Sources */,
 				DCA75A3D18CBAE7C00C5C998 /* FeedStoreViewController.m in Sources */,
 				DC0A2A0018C3C4260086DF6A /* UIColor+SimpleColor.m in Sources */,
+				DC471CF918CE376A00B1B689 /* CardView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
